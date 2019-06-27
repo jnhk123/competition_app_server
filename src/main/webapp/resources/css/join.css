@@ -1,0 +1,42 @@
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
+p{
+	font-size: 8px;
+}
+
+#text{
+	margin: 20% auto;
+	width: 80%;
+}
+
+#button{
+	margin: 0 auto;
+	width: 80%;
+}
+
+#join{
+	
+}
+
+#cancel{
+	margin-left: 10px;
+}
+
+#id{
+	width: 50%;
+}
+
+#id_check_btn{
+	margin-left: 5px;
+}
+
+.join_text{
+	
+}
+
+.join_button{
+	float: right;
+}
