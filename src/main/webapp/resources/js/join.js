@@ -148,7 +148,9 @@ var join = {
 		lack : { code : 'lack', desc : '영문자, 숫자, 특수문자 모두 포함하여야 합니다.' },
 		valid : { code : 'valid', desc : '사용 가능한 비밀번호입니다.' },
 		equal : { code : 'valid', desc : '비밀번호가 일치합니다.' },
-		notequal : { code : 'invalid', desc : '비밀번호가 일치하지 않습니다.' }
+		notequal : { code : 'invalid', desc : '비밀번호가 일치하지 않습니다.' },
+		min : {code : 'min', desc : '8자 이상입력해주세요'},
+		max : {code : 'max', desc : '12자 이하입력해주세요'}
 	},
 	// 아이디 판별 함수 선언
 	id_usable : function(data) {
@@ -228,6 +230,10 @@ var join = {
 			return this.pw.invalid;
 		} else if (!(digit.test(pw) && reg2.test(pw) && reg3.test(pw))) {
 			return this.pw.lack;
+		} else if (pw.length < 8) {
+			return this.pw.min;
+		} else if (pw.length > 12) {
+			return this.pw.max;
 		} else {
 			return this.pw.valid;
 		}

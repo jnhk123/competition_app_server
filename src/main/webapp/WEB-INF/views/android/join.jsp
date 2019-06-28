@@ -28,6 +28,7 @@
 <input class="join_text" type="text" placeholder="이름" name="name" id="name">
 <input class="join_text" type="email" placeholder="이메일" name="email" id="email" onkeyup="validate('email')">
 <input class="join_text" type="password" placeholder="비밀번호" name="pw" id="pw" onkeyup="validate('pw')">
+<p id="pw_status" class="invalid">비밀번호를 입력해주세요</p>
 <input class="join_text" type="password" placeholder="비밀번호 확인" name="pwd_ck" id="check_pw" onkeyup="validate('pwd_ck')">
 <p id="pwd_ck_status" class="invalid">비밀번호를 확인해주세요</p>
 </div>
