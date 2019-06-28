@@ -9,4 +9,8 @@
 	<select id="id_check" resultType="String">
 		select id from client where id = #{id}
 	</select>
+	
+	<select id="loginRequest" resultType="client.ClientVO">
+		select id,fn_decrypt(pw) pw,name,joinDate from client where id = #{id} and pw = fn_encrypt(#{pw})
+	</select>
 </mapper>

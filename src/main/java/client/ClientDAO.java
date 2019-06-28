@@ -1,5 +1,7 @@
 package client;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,6 +10,15 @@ import org.springframework.stereotype.Repository;
 public class ClientDAO {
 	@Autowired
 	private SqlSession sql;
+	
+	public ClientVO loginRequest(HashMap<String, String> map) {
+		ClientVO vo = sql.selectOne("client-mapper.loginRequest",map);
+		if(vo == null) {
+			vo = new ClientVO();
+			vo.setResult("noResult");
+		}
+		return vo;
+	}
 
 	public void join(ClientVO vo) {
 		sql.insert("client-mapper.join", vo);
