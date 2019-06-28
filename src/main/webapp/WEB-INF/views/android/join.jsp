@@ -28,13 +28,14 @@
 <input class="join_text" type="email" placeholder="이메일" name="email" id="email">
 <input class="join_text" type="password" placeholder="비밀번호" name="pw" id="pw">
 <input class="join_text" type="password" placeholder="비밀번호 확인" id="check_pw">
+<p id="pw_status_text"></p>
 </div>
 <div id="button">
 <a class="waves-effect waves-light btn join_button" id="cancel" onclick="web_finish()">취소</a>
 <a class="waves-effect waves-light btn join_button" id="join" onclick="join()">등록</a>
 </div>
 
-<input type="hidden" id="is_id_check">
+<input type="hidden" id="is_id_check" value="unable">
 
 </body>
 </html>

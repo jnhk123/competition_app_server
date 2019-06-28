@@ -40,3 +40,10 @@ p{
 .join_button{
 	float: right;
 }
+
+.valid{
+	color: green;
+}
+.invalid{
+	color: red;
+}

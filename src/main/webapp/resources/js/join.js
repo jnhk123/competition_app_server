@@ -8,11 +8,9 @@ function need_id_check() {
 
 function join() {
 	if($('#is_id_check').val() == 'unable'){
-		window.android.join();
 		alert('중복체크 해주세요');
 		return false;
 	}
-	
 	$.ajax({
 		type : 'post',
 		url : 'join.jo',
@@ -36,6 +34,11 @@ function join() {
 }
 
 function id_check() {
+	if($('#id').val().trim() == ''){
+		alert('내용을 입력해주세요');
+		return false;
+	}
+	
 	$.ajax({
 		type : 'post',
 		url : 'id_check',
@@ -57,4 +60,10 @@ function id_check() {
 			alert('아이디 중복검사에 실패하였습니다.');
 		}
 	});
+}
+
+function pw_check() {
+	if($('#pw').val.trim() == '' || $('#check_pw').val.trim() == ''){
+		
+	}
 }
