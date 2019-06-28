@@ -122,7 +122,8 @@ var join = {
 	},
 	id : {
 		empty : { code : 'empty', desc : '아이디를 입력하세요' },
-		invalid : { code : 'invalid', desc : '아이디는 영소문자로 시작하며 영소문자 또는 숫자만 입력해주세요.' },
+		invalid : { code : 'invalid', desc : '아이디는 영소문자와 숫자를 포함해서 입력해주세요.' },
+		invalid2 : {code : 'invalid', desc : '아이디는 영소문자와 숫자만 입력가능합니다.'},
 		valid : { code : 'valid', desc : '아이디 중복 확인 하세요' },
 		usable : { code : 'usable', desc : '사용 가능한 아이디 입니다.' },
 		unusable : { code : 'unusable', desc : '이미 사용 중인 아이디 입니다.' }
@@ -130,6 +131,7 @@ var join = {
 	name:{
 		empty : {code : 'empty', desc : '이름을 입력하세요' },
 		space : { code : 'space', desc : '공백 없이 입력해주세요' },
+		korean : {code : 'korean', desc : '이름은 한글만 입력해주세요'},
 		valid : { code : 'valid', desc : '이름이 입력되었습니다.' },
 		min : {code : 'min', desc : '2글자 이상 입력해주세요'},
 		max : {code : 'max', desc : '10글자 이하 입력하세요'}
@@ -142,8 +144,8 @@ var join = {
 	},
 	pw : {
 		empty : { code : 'empty', desc : '비밀번호를 입력하세요' },
-		invalid : { code : 'invalid', desc : '영소문자, 숫자만 입력해주세요.' },
-		lack : { code : 'lack', desc : '영소문자, 숫자 모두 포함하여야 합니다.' },
+		invalid : { code : 'invalid', desc : '8~12자 사이의 특수문자, 영문자, 숫자를 포함해주세요' },
+		lack : { code : 'lack', desc : '영문자, 숫자, 특수문자 모두 포함하여야 합니다.' },
 		valid : { code : 'valid', desc : '사용 가능한 비밀번호입니다.' },
 		equal : { code : 'valid', desc : '비밀번호가 일치합니다.' },
 		notequal : { code : 'invalid', desc : '비밀번호가 일치하지 않습니다.' }
@@ -158,15 +160,19 @@ var join = {
 	},
 
 	id_status : function(id) { // 영 소문자, 숫자
-		var reg = /[^a-z0-9]/g;
+		var reg = /[a-z]/g;
+		var reg2 = /[0-9]/g;
+		var reg3 = /^[a-z0-9]{4,10}$/;
 		var space = /\s/g;
 
 		if (id == '') {
 			return this.id.empty;
 		} else if (id.match(space)) {
 			return this.common.space;
-		} else if (reg.test(id)) {
+		} else if (!(reg.test(id) && reg2.test(id)) ) {
 			return this.id.invalid;
+		} else if(!reg3.test(id)){
+			return this.id.invalid2;
 		} else if (id.length < 4) { // 4문자 이상
 			return this.common.min;
 		} else if (id.length > 10) { // 5문자 이하
@@ -177,11 +183,14 @@ var join = {
 	},
 	
 	name_status : function(name){
+		var reg = /^[가-히]/;
 		var space = /\s/g;
 		if (name.trim() == ''){
 			return this.name.empty;
 		}else if(name.match(space)){
 			return this.name.space;
+		}else if(!reg.test(name)){
+			return this.name.korean;
 		}else if (name.length < 2) { // 5문자 이상
 			return this.name.min;
 		}else if (name.length > 10) { // 5문자 이하
@@ -207,15 +216,17 @@ var join = {
 	
 	pwd_status : function(pw) { // 영소문자, 숫자 모두 포함
 		var space = /\s/g;
-		var reg = /[^a-z0-9]/g;
+		var reg = /[a-z0-9!@#$%^&*]/g;
+		var reg2 = /[a-zA-Z]/g;
+		var reg3 = /[!@#$%^&*]/g;
 		var digit = /[0-9]/g;
 		if (pw == '') {
 			return this.pw.empty;
 		} else if (pw.match(space)) {
 			return this.common.space;
-		} else if (reg.test(pw)) {
+		} else if (!reg.test(pw)) {
 			return this.pw.invalid;
-		} else if (!digit.test(pw)) {
+		} else if (!(digit.test(pw) && reg2.test(pw) && reg3.test(pw))) {
 			return this.pw.lack;
 		} else {
 			return this.pw.valid;
