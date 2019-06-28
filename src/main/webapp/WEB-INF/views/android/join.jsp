@@ -15,6 +15,9 @@
 
 <script type="text/javascript" src="resources/js/join.js"></script>
 <link rel="stylesheet" href="resources/css/join.css?<%=new java.util.Date().getTime()%>">
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 
@@ -27,7 +30,7 @@
 <input class="join_text" type="password" placeholder="비밀번호 확인" id="check_pw">
 </div>
 <div id="button">
-<a class="waves-effect waves-light btn join_button" id="cancel" onclick="windowClose()">취소</a>
+<a class="waves-effect waves-light btn join_button" id="cancel" onclick="web_finish()">취소</a>
 <a class="waves-effect waves-light btn join_button" id="join" onclick="join()">등록</a>
 </div>
 

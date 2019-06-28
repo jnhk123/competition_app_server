@@ -1,6 +1,5 @@
-function windowClose() {
-	self.opener = self;
-	window.close();
+function web_finish(){
+	window.android.webview_finish();
 }
 
 function need_id_check() {
@@ -9,10 +8,10 @@ function need_id_check() {
 
 function join() {
 	if($('#is_id_check').val() == 'unable'){
-		alert('중복체크 해주세요')
+		window.android.join();
+		alert('중복체크 해주세요');
 		return false;
 	}
-	
 	
 	$.ajax({
 		type : 'post',
@@ -26,7 +25,7 @@ function join() {
 		success : function (data) {
 			if(data == 'success'){
 				alert('회원가입이 완료되었습니다.');
-				windowClose();
+				web_finish()
 			}
 		},
 		error : function(req) {
