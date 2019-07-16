@@ -2,6 +2,8 @@ package com.competition.appServer;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,11 @@ import client.ClientVO;
 public class ClientController {
 	@Autowired private ClientService service;
 	
-	@RequestMapping(value = {"/loginRequest"}, method= {RequestMethod.GET, RequestMethod.POST})
-	public String loginRequest(@RequestParam String id, @RequestParam String pw, Model model) {
+	@RequestMapping(value = {"/loginRequest"}, method= {RequestMethod.POST})
+	public String loginRequest(HttpServletRequest req, Model model) {
+		String id = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("pw", pw);
@@ -29,7 +34,7 @@ public class ClientController {
 	}
 	
 	//회원가입 화면으로 넘기기
-	@RequestMapping("/android_join")
+	@RequestMapping(value="/android_join", method = RequestMethod.GET)
 	public String go_join_page() {
 		return "android/join";
 	}

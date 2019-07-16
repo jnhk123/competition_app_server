@@ -2,15 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="client-mapper">
 	<insert id="join">
-		insert into client(id,pw,email,name)
-		values(#{id},fn_encrypt(#{pw}),#{email},#{name})
+		insert into client(
+			id
+			,pw
+			,email
+			,name
+			)
+		values(
+			#{id}
+			,fn_encrypt(#{pw})
+			,#{email}
+			,#{name}
+			)
 	</insert>
 	
 	<select id="id_check" resultType="String">
-		select id from client where id = #{id}
+		select 
+		id 
+		from client 
+		where id = #{id}
 	</select>
 	
 	<select id="loginRequest" resultType="client.ClientVO">
-		select id,fn_decrypt(pw) pw,name,joinDate from client where id = #{id} and pw = fn_encrypt(#{pw})
+		select 
+			id
+			,fn_decrypt(pw) pw
+			,name
+			,joinDate
+			,email 
+		from client 
+		where id = #{id} and pw = fn_encrypt(#{pw})
 	</select>
 </mapper>
