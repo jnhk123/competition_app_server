@@ -157,6 +157,15 @@
 			<version>1.4</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.16.14</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		
 		<!-- 안드로이드통신 -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>

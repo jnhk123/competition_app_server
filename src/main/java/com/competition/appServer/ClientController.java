@@ -3,6 +3,7 @@ package com.competition.appServer;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import api.NaverLoginAPI;
 import client.ClientService;
 import client.ClientVO;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class ClientController {
 	@Autowired private ClientService service;
+	
+	@Autowired private NaverLoginAPI naverApi;
 	
 	@RequestMapping(value = {"/loginRequest"}, method= {RequestMethod.POST})
 	public String loginRequest(HttpServletRequest req, Model model) {
@@ -31,6 +37,33 @@ public class ClientController {
 		model.addAttribute("result",service.loginRequest(map));
 		
 		return "android/loginRequestJson";
+	}
+	
+	@RequestMapping(value= {"/naverLoginCallback"})
+	public String naver_login(HttpServletRequest req, HttpServletResponse res ) {
+		String naverState = req.getAttribute("naverState").toString();
+		
+		
+		
+		
+		
+		return "redirect:/home";
+	}
+	
+	//sns로그인화면으로 가기
+	@RequestMapping(value={"/go_snsLogin.do"}, method=RequestMethod.GET)
+	public String go_snsLoginView(HttpServletRequest req, Model model) {
+		log.info("===> URI : "+req.getRequestURI());
+		log.info("===> URL : "+req.getRequestURL().toString());
+		String host = req.getRequestURL().toString().replace(req.getRequestURI(), "");
+		log.info(host);
+		String naverCallbackUrl = host + "/appServer/naverLoginCallback";
+		String state = naverApi.generateState();
+		req.getSession().setAttribute("NaverState", state);
+		model.addAttribute("host", host);
+		model.addAttribute("naverCallBack",naverCallbackUrl);
+		model.addAttribute("client_id","rNwPTVhXguxm7NArSVQs");
+		return "android/SNS_loginView";
 	}
 	
 	//회원가입 화면으로 넘기기

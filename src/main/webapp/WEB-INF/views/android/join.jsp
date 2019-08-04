@@ -15,9 +15,7 @@
 
 <script type="text/javascript" src="resources/js/join.js"></script>
 <link rel="stylesheet" href="resources/css/join.css?<%=new java.util.Date().getTime()%>">
-<script type="text/javascript">
 
-</script>
 </head>
 <body>
 
@@ -36,8 +34,8 @@
 <a class="waves-effect waves-light btn join_button" id="cancel" onclick="web_finish()">취소</a>
 <a class="waves-effect waves-light btn join_button" id="join" onclick="go_join()">등록</a>
 </div>
-
-
-
+<div>
+<a href="go_snsLogin.do">SNS 로그인</a>
+</div>
 </body>
 </html>
